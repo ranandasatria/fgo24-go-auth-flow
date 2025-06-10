@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fgo24-go-auth-flow/utils"
+	"fmt"
+)
 
 type User struct {
 	Email string
@@ -12,10 +15,7 @@ var users []User
 func main() {
 	for {
 		var menu int
-		fmt.Println("\n=== MENU ===")
-		fmt.Println("1. Register")
-		fmt.Println("2. Login")
-		fmt.Println("0. Keluar")
+		utils.Menu()
 		fmt.Print("Pilih: ")
 		fmt.Scanf("%d\n", &menu)
 
