@@ -19,8 +19,11 @@ func Forgot() {
 			found = true
 
 			fmt.Print("Enter your new password: ")
-			fmt.Scanln(&utils.Users[i].Password)
+			var newPassword string
+			fmt.Scanln(&newPassword)
 
+			utils.Users[i].Password = hashPassword((newPassword))
+		
 			fmt.Println("Password updated.")
 		}
 	}

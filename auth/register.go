@@ -21,7 +21,8 @@ func Register() {
 	fmt.Print("Enter your password: ")
 	fmt.Scanln(&newUser.Password)
 
-	utils.Users = append(utils.Users, *newUser)
+	newUser.Password = hashPassword(newUser.Password)
 
+	utils.Users = append(utils.Users, *newUser)
 	fmt.Println("Account created.")
 }

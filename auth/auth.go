@@ -1,9 +1,16 @@
 package auth
 
 import (
+	"crypto/md5"
+	"encoding/hex"
 	"fmt"
 	"os"
 )
+
+func hashPassword(password string) string{
+	hash:= md5.Sum([]byte(password))
+	return hex.EncodeToString(hash[:])
+}
 
 func Auth() {
 	for {
