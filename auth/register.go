@@ -1,17 +1,27 @@
 package auth
 
 import (
-	"fmt"
 	"fgo24-go-auth-flow/utils"
+	"fmt"
 )
 
 func Register() {
 	fmt.Println("=== Register ===")
+
+	newUser:= &utils.User{}
+
 	fmt.Print("Enter your email: ")
-	fmt.Scanln(&utils.DataUser.Email)
+	fmt.Scanln(&newUser.Email)
+
+	if utils.IsEmailTaken(newUser.Email) {
+		fmt.Println("Email is already registered. Please login or use another email.")
+		return
+	}
 
 	fmt.Print("Enter your password: ")
-	fmt.Scanln(&utils.DataUser.Password)
+	fmt.Scanln(&newUser.Password)
 
-	fmt.Println("Account created.\n")
+	utils.Users = append(utils.Users, *newUser)
+
+	fmt.Println("Account created.")
 }

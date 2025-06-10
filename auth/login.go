@@ -9,10 +9,20 @@ import (
 func Login() {
 	fmt.Println("=== Login ===")
 
-	fmt.Print("Enter your email: ")
-	fmt.Scanln(&utils.DataLogin.Email)
+	newLogin:= &utils.User{}
 
-	if utils.DataLogin.Email != utils.DataUser.Email {
+	fmt.Print("Enter your email: ")
+	fmt.Scanln(&newLogin.Email)
+
+	var foundUser *utils.User
+	for i := range utils.Users{
+		if utils.Users[i].Email == newLogin.Email{
+			foundUser = &utils.Users[i]
+			break
+		}
+	}
+
+	if foundUser == nil{
 		fmt.Println("Email not found.")
 		fmt.Println("1. Register")
 		fmt.Println("2. Try again")
@@ -32,11 +42,11 @@ func Login() {
 	}
 
 	fmt.Print("Enter your password: ")
-	fmt.Scanln(&utils.DataLogin.Password)
+	fmt.Scanln(&newLogin.Password)
 
-	if utils.DataLogin.Password != utils.DataUser.Password {
+	if newLogin.Password != foundUser.Password {
 		fmt.Println("Wrong password.")
-		fmt.Println("1. Forgot")
+		fmt.Println("1. Forgot password")
 		fmt.Println("2. Try again")
 		fmt.Println("3. Exit")
 		var choice int

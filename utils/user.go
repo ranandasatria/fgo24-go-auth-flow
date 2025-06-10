@@ -5,5 +5,15 @@ type User struct {
 	Password string
 }
 
-var DataUser User
-var DataLogin User
+var Users []User	
+
+
+func IsEmailTaken(email string) bool {
+	for _, u := range Users {
+		if u.Email == email {
+			return true
+		}
+	}
+	return false
+}
+
