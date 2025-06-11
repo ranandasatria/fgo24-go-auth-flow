@@ -8,7 +8,7 @@ import (
 func Register() {
 	fmt.Println("=== Register ===")
 
-	newUser:= &utils.User{}
+	newUser := &utils.User{}
 
 	fmt.Print("Enter your email: ")
 	fmt.Scanln(&newUser.Email)

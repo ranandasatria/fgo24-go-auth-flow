@@ -14,6 +14,7 @@ func hashPassword(password string) string{
 
 func Auth() {
 	for {
+		
 		fmt.Println("======")
 		fmt.Println("1. Register")
 		fmt.Println("2. Login")

@@ -1,28 +1,28 @@
 package auth
 
 import (
+	"fgo24-go-auth-flow/utils"
 	"fmt"
 	"os"
-	"fgo24-go-auth-flow/utils"
 )
 
 func Login() {
 	fmt.Println("=== Login ===")
 
-	newLogin:= &utils.User{}
+	newLogin := &utils.User{}
 
 	fmt.Print("Enter your email: ")
 	fmt.Scanln(&newLogin.Email)
 
 	var foundUser *utils.User
-	for i := range utils.Users{
-		if utils.Users[i].Email == newLogin.Email{
+	for i := range utils.Users {
+		if utils.Users[i].Email == newLogin.Email {
 			foundUser = &utils.Users[i]
 			break
 		}
 	}
 
-	if foundUser == nil{
+	if foundUser == nil {
 		fmt.Println("Email not found.")
 		fmt.Println("1. Register")
 		fmt.Println("2. Try again")
@@ -31,11 +31,12 @@ func Login() {
 		fmt.Print("Choose: ")
 		fmt.Scanln(&choice)
 
-		if choice == 1 {
+		switch choice {
+		case 1:
 			Register()
-		} else if choice == 2 {
+		case 2:
 			Login()
-		} else {
+		default:
 			os.Exit(0)
 		}
 		return
@@ -44,7 +45,9 @@ func Login() {
 	fmt.Print("Enter your password: ")
 	fmt.Scanln(&newLogin.Password)
 
-	if newLogin.Password != foundUser.Password {
+	hashedInput := hashPassword(newLogin.Password)
+
+	if hashedInput != foundUser.Password {
 		fmt.Println("Wrong password.")
 		fmt.Println("1. Forgot password")
 		fmt.Println("2. Try again")
@@ -53,11 +56,12 @@ func Login() {
 		fmt.Print("Choose: ")
 		fmt.Scanln(&choice)
 
-		if choice == 1 {
+		switch choice {
+		case 1:
 			Forgot()
-		} else if choice == 2 {
+		case 2:
 			Login()
-		} else {
+		default:
 			os.Exit(0)
 		}
 		return
